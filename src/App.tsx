@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
+import TabContainer from './components/TabContainer/TabContainer';
 
 function App() {
   return (
     <div className="App">
-      <h1>MCC</h1>
+      <TabContainer/>
     </div>
   );
 }

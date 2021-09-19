@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 50vw;
+  background: #f1f1f1;
+  margin: 100px auto 0;
+  word-break: break-all;
+  border: 1px solid rgba(0, 0, 0, 0.274);
+}
+
+.block-tabs {
+  display: flex;
+}

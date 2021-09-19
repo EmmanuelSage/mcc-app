@@ -7839,6 +7839,11 @@ pako@~1.0.5:
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.11.tgz#6c9599d340d54dfd3946380252a35705a6b992bf"
   integrity sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==
 
+papercss@^1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/papercss/-/papercss-1.8.2.tgz#d0896c53db1f6ca8cf9dd1be0adc2f00d3ee4d80"
+  integrity sha512-ySinFM2GjPGdgWQr+5FB1PpByjixcc5i1iw8DjQGcXUvbSgtLEC1Q0iJjwx54/IU/lKQ0cSQd5FqaALWcNOASA==
+
 parallel-transform@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/parallel-transform/-/parallel-transform-1.2.0.tgz#9049ca37d6cb2182c3b1d2c720be94d14a5814fc"
