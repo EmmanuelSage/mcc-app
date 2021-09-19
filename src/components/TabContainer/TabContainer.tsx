@@ -1,17 +1,10 @@
-import { useContext, useState } from "react";
-import { DbContext } from "../../context/DbContext";
+import { useState } from "react";
 import TabButton from "../TabButton/TabButton";
 import TabContent from "../TabContent/TabContent";
+import {MccPage} from '../../types/MccPage'
 import "./TabContainer.css";
 
-enum MccPage {
-  CreateApplication,
-  ViewApplication,
-  UpdateApplication,
-}
-
 function Tabs() {
-  const { db } = useContext(DbContext);
   const [toggleState, setToggleState] = useState(MccPage.CreateApplication);
 
   const toggleTab = (index: number) => {
@@ -49,7 +42,7 @@ function Tabs() {
         tabContentChildren={[
           {
             id: MccPage.CreateApplication,
-            component: <h1> {db.title} + Create Application </h1>,
+            component: <h1> Create Application </h1>,
           },
           { id: MccPage.ViewApplication, component: <h1>View Application</h1> },
           {
