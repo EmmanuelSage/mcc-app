@@ -4,7 +4,7 @@ import { ReviewRequest } from "../types/ReviewRequest";
 
 export interface IDb {
   currentApp: string;
-  apps: App | {};
+  apps: App;
   reviewRequestsIdCount: number;
   reviewRequests: ReviewRequest | {};
 }

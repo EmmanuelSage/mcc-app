@@ -5,13 +5,16 @@ export interface Role {
   permissions: permission[]
 }
 
-export interface App {
+export interface AppInfo {
   metadata: {
     name: string;
     owner: string;
     configManager: string;
   },
   technicalData: {
-    roles: Role[],
+    roles: Role,
   },
+}
+export interface App {
+  [key: string] : AppInfo
 }
