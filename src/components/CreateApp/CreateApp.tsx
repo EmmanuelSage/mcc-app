@@ -34,6 +34,12 @@ function CreateApp() {
     } 
     db.apps[name] = app
     setDb(db)
+    setName('')
+    setOwner('')
+    setConfigManager('')
+    setRoleName('')
+    setIsCheckedInitiate(false)
+    setIsCheckedApprove(false)
   }
 
   return (
