@@ -4,8 +4,8 @@ import TabContent from "../TabContent/TabContent";
 import { MccPage } from "../../types/MccPage";
 import "./TabContainer.css";
 import CreateApp from "../CreateApp/CreateApp";
-import ListComponent from "../ListComponent/ListComponent";
 import UpdateApp from "../UpdateApp/UpdateApp";
+import ViewApp from "../ViewApp/ViewApp";
 
 enum SectionTitles {
   CreateApplicationv = "Create App",
@@ -66,7 +66,7 @@ function Tabs() {
             component: (
               <div>
                 <h1>{SectionTitles.ViewApplication}</h1>
-                <ListComponent toggleTab={toggleTab} />
+                <ViewApp toggleTab={toggleTab} />
               </div>
             ),
           },
