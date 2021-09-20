@@ -1,6 +1,6 @@
-type permission = "initiate" | "approve"
+export type permission = "initiate" | "approve"
 
-interface Role {
+export interface Role {
   roleName: string;
   permissions: permission[]
 }

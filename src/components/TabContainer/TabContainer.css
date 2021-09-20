@@ -7,6 +7,7 @@
   margin: 0.5rem auto 0;
   word-break: break-all;
   border: 1px solid rgba(0, 0, 0, 0.274);
+  text-align: center;
 }
 
 .block-tabs {
