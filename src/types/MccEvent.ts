@@ -1,6 +1,6 @@
 export enum MccEvent {
   CreateApplication,
   InitiateUpdateApplication,
-  ApprroveApplication,
+  ApproveApplication,
   CloseApplication
 }

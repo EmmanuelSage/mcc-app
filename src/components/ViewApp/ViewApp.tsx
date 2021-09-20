@@ -16,33 +16,27 @@ const ViewApp: React.FC<IProps> = ({ toggleTab }): JSX.Element => {
     <div className="row">
       {apps.map((app: AppInfo, index: number) => {
         return (
-          <div className="row">
-            {apps.map((app: AppInfo, index: number) => {
-              return (
-                <ListComponent
-                  listDetails={[
-                    { label: "Owner : ", details: app.metadata.owner },
-                    {
-                      label: "Config Manager : ",
-                      details: app.metadata.configManager,
-                    },
-                    {
-                      label: "Role Name : ",
-                      details: app.technicalData.roles.roleName,
-                    },
-                    {
-                      label: "Permissions : ",
-                      details: app.technicalData.roles.permissions.join("/"),
-                    },
-                  ]}
-                  key={index}
-                  appName={app.metadata.name}
-                  toggleTab={toggleTab}
-                  pageType={MccPage.ViewApplication}
-                />
-              );
-            })}
-          </div>
+          <ListComponent
+            listDetails={[
+              { label: "Owner : ", details: app.metadata.owner },
+              {
+                label: "Config Manager : ",
+                details: app.metadata.configManager,
+              },
+              {
+                label: "Role Name : ",
+                details: app.technicalData.roles.roleName,
+              },
+              {
+                label: "Permissions : ",
+                details: app.technicalData.roles.permissions.join("/"),
+              },
+            ]}
+            key={index}
+            appName={app.metadata.name}
+            toggleTab={toggleTab}
+            pageType={MccPage.ViewApplication}
+          />
         );
       })}
     </div>

@@ -8,10 +8,13 @@ interface listDetailsInfo {
 
 type listDetails = listDetailsInfo[];
 interface IProps {
+  reviewRequestId?: number;
   appName: string;
   pageType: MccPage;
   listDetails: listDetails;
   toggleTab: (index: number) => void;
+  onApprove?: (id: number) => void;
+  onClose?: (id: number) => void;
 }
 
 const ListComponent: React.FC<IProps> = ({
@@ -19,6 +22,9 @@ const ListComponent: React.FC<IProps> = ({
   appName,
   pageType,
   listDetails,
+  reviewRequestId = 0,
+  onApprove = () => {},
+  onClose = () => {},
 }): JSX.Element => {
   return (
     <div className="row">
@@ -33,7 +39,7 @@ const ListComponent: React.FC<IProps> = ({
               </p>
             ))}
             <div className=" col-6 col card-text">
-              {pageType === MccPage.ViewApplication && (
+              {pageType === MccPage.ViewApplication ? (
                 <button
                   onClick={() => {
                     toggleTab(MccPage.UpdateApplication);
@@ -41,6 +47,26 @@ const ListComponent: React.FC<IProps> = ({
                 >
                   Update
                 </button>
+              ) : (
+                <>
+                  <button
+                    onClick={() => {
+                      onApprove(reviewRequestId)
+                      toggleTab(MccPage.ViewApplication);
+                    }}
+                  >
+                    Approve
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      onClose(reviewRequestId)
+                      toggleTab(MccPage.ViewApplication);
+                    }}
+                  >
+                    Close
+                  </button>
+                </>
               )}
             </div>
           </div>

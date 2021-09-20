@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import TabButton from "../TabButton/TabButton";
 import TabContent from "../TabContent/TabContent";
 import { MccPage } from "../../types/MccPage";
@@ -6,14 +6,18 @@ import "./TabContainer.css";
 import CreateApp from "../CreateApp/CreateApp";
 import UpdateApp from "../UpdateApp/UpdateApp";
 import ViewApp from "../ViewApp/ViewApp";
+import ApproveCloseApp from "../ApproveCloseApp/ApproveCloseApp";
+import { DbContext } from "../../context/DbContext";
 
 enum SectionTitles {
   CreateApplicationv = "Create App",
   ViewApplication = "View App",
   UpdateApplication = "Update App",
+  ApproveCloseRequest = "Approve/Close",
 }
 
 function Tabs() {
+  const { db } = useContext(DbContext);
   const [toggleState, setToggleState] = useState(MccPage.CreateApplication);
 
   const toggleTab = (index: MccPage) => {
@@ -21,7 +25,7 @@ function Tabs() {
   };
 
   return (
-    <div className="container">
+    <div className="tab-container">
       <div className="block-tabs">
         <TabButton
           id={MccPage.CreateApplication}
@@ -43,6 +47,18 @@ function Tabs() {
           toggleTab={toggleTab}
         >
           {SectionTitles.UpdateApplication}
+        </TabButton>
+        <TabButton
+          id={MccPage.ApproveCloseRequest}
+          toggleState={toggleState}
+          toggleTab={toggleTab}
+        >
+          {SectionTitles.ApproveCloseRequest}
+          {db.reviewRequestsIdCount ? (
+            <span className="badge success"> {db.reviewRequestsIdCount} </span>
+          ) : (
+            ""
+          )}
         </TabButton>
       </div>
 
@@ -76,9 +92,18 @@ function Tabs() {
               <div>
                 <h1> {SectionTitles.UpdateApplication} </h1>
                 <UpdateApp
-                  redirectTo={MccPage.ViewApplication}
+                  redirectTo={MccPage.ApproveCloseRequest}
                   toggleTab={toggleTab}
                 />
+              </div>
+            ),
+          },
+          {
+            id: MccPage.ApproveCloseRequest,
+            component: (
+              <div>
+                <h1> {SectionTitles.ApproveCloseRequest}</h1>
+                <ApproveCloseApp toggleTab={toggleTab} />
               </div>
             ),
           },

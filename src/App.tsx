@@ -5,7 +5,7 @@ import { DbContext, useValue } from "./context/DbContext";
 function App() {
   return (
     <DbContext.Provider value={useValue()}>
-      <HomePage/>
+      <HomePage />
     </DbContext.Provider>
   );
 }
