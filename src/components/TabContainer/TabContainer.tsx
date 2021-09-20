@@ -4,17 +4,19 @@ import TabContent from "../TabContent/TabContent";
 import { MccPage } from "../../types/MccPage";
 import "./TabContainer.css";
 import CreateApp from "../CreateApp/CreateApp";
+import ListComponent from "../ListComponent/ListComponent";
+import UpdateApp from "../UpdateApp/UpdateApp";
 
 enum SectionTitles {
-  CreateApplicationv = 'Create Application',
-  ViewApplication = 'View Application',
-  UpdateApplication = 'Update Application'
+  CreateApplicationv = "Create App",
+  ViewApplication = "View App",
+  UpdateApplication = "Update App",
 }
 
 function Tabs() {
   const [toggleState, setToggleState] = useState(MccPage.CreateApplication);
 
-  const toggleTab = (index: number) => {
+  const toggleTab = (index: MccPage) => {
     setToggleState(index);
   };
 
@@ -52,14 +54,33 @@ function Tabs() {
             component: (
               <div>
                 <h1> {SectionTitles.CreateApplicationv} </h1>
-                <CreateApp />
+                <CreateApp
+                  redirectTo={MccPage.ViewApplication}
+                  toggleTab={toggleTab}
+                />
               </div>
             ),
           },
-          { id: MccPage.ViewApplication, component: <h1>{SectionTitles.ViewApplication}</h1> },
+          {
+            id: MccPage.ViewApplication,
+            component: (
+              <div>
+                <h1>{SectionTitles.ViewApplication}</h1>
+                <ListComponent toggleTab={toggleTab} />
+              </div>
+            ),
+          },
           {
             id: MccPage.UpdateApplication,
-            component: <h1>{SectionTitles.UpdateApplication}</h1>,
+            component: (
+              <div>
+                <h1> {SectionTitles.UpdateApplication} </h1>
+                <UpdateApp
+                  redirectTo={MccPage.ViewApplication}
+                  toggleTab={toggleTab}
+                />
+              </div>
+            ),
           },
         ]}
       />

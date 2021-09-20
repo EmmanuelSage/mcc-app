@@ -9,7 +9,7 @@ interface IProps {
   handleChange: ChangeEventHandler<HTMLInputElement>;
 }
 
-const InputField: React.FC<IProps> = ({label, type='text', value, handleChange, isRequired = false}) => {
+const InputField: React.FC<IProps> = ({label, type='text', value, handleChange, isRequired = true}) => {
   return (
     <div className='inputfield-container row row-fill flex-center'>
       <div className="col">

@@ -1,76 +1,29 @@
-import React, { SyntheticEvent, useContext, useState } from 'react'
-import { DbContext } from '../../context/DbContext';
-import { AppInfo, permission } from '../../types/App';
-import InputCheckbox from "../InputCheckbox/InputCheckbox";
-import InputField from '../InputField/InputField'
-import './CreateApp.css'
+import React from "react";
+import { MccPage } from "../../types/MccPage";
+import AppForm from "../AppForm/AppForm";
 
-function CreateApp() {
-  const { db , setDb} = useContext(DbContext);
-  const [name, setName] = useState('')
-  const [owner, setOwner] = useState('')
-  const [configManager, setConfigManager] = useState('')
-  const [roleName, setRoleName] = useState("");
-  const [isCheckedInitiate, setIsCheckedInitiate] = useState(false);
-  const [isCheckedApprove, setIsCheckedApprove] = useState(false);
+import "./CreateApp.css";
 
-  const handleSubmit = (e: SyntheticEvent) => {
-    e.preventDefault()
-    const permissions:permission[] = []
-    if(isCheckedInitiate) permissions.push('initiate')
-    if(isCheckedApprove) permissions.push('approve')
-    const app: AppInfo = {
-      metadata: {
-        name,
-        owner,
-        configManager
-      },
-      technicalData: {
-        roles: {
-          roleName,
-          permissions
-        },
-      },
-    } 
-    db.apps[name] = app
-    setDb(db)
-    setName('')
-    setOwner('')
-    setConfigManager('')
-    setRoleName('')
-    setIsCheckedInitiate(false)
-    setIsCheckedApprove(false)
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <InputField label='Name' value={name} handleChange={(e) => setName(e.target.value)}/>
-      <InputField label='Owner' value={owner} handleChange={(e) => setOwner(e.target.value)}/>
-      <InputField label='Config Manager' value={configManager} handleChange={(e) => setConfigManager(e.target.value)}/>
-      <h4 className="roles-header"> Roles </h4>
-      <InputField
-        label="Role Name : "
-        value={roleName}
-        handleChange={(e) => setRoleName(e.target.value)}
-      />
-      <fieldset className="form-group">
-        <legend>Permissions</legend>
-
-        <InputCheckbox
-          label="Initiate"
-          isChecked={isCheckedInitiate}
-          handleChange={() => setIsCheckedInitiate(!isCheckedApprove)}
-        />
-
-        <InputCheckbox
-          label="Approve"
-          isChecked={isCheckedApprove}
-          handleChange={() => setIsCheckedApprove(!isCheckedApprove)}
-        />
-      </fieldset>
-      <button type="submit"> Submit </button>
-    </form>
-  )
+interface IProps {
+  redirectTo: MccPage;
+  toggleTab: (index: number) => void;
 }
 
-export default CreateApp
+const CreateApp: React.FC<IProps> = ({ toggleTab, redirectTo }) => {
+  return (
+    <AppForm
+      toggleTab={toggleTab}
+      redirectTo={redirectTo}
+      appDefaults={{
+        name: '',
+        owner: '',
+        configManager: '',
+        roleName: '',
+        isCheckedInitiate: false,
+        isCheckedApprove: false,
+      }}
+    />
+  );
+};
+
+export default CreateApp;
