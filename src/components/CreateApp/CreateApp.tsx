@@ -1,4 +1,5 @@
 import React from "react";
+import { FormType } from "../../types/FormType";
 import { MccPage } from "../../types/MccPage";
 import AppForm from "../AppForm/AppForm";
 
@@ -14,6 +15,7 @@ const CreateApp: React.FC<IProps> = ({ toggleTab, redirectTo }) => {
     <AppForm
       toggleTab={toggleTab}
       redirectTo={redirectTo}
+      type={FormType.CreateApplication}
       appDefaults={{
         name: '',
         owner: '',

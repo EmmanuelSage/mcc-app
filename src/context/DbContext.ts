@@ -6,7 +6,7 @@ export interface IDb {
   currentApp: string;
   apps: App;
   reviewRequestsIdCount: number;
-  reviewRequests: ReviewRequest | {};
+  reviewRequests: ReviewRequest;
 }
 
 export const useValue = () => {

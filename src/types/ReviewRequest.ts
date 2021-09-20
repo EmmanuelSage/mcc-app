@@ -1,11 +1,15 @@
 import { IDb } from "../context/DbContext";
-import { App } from "./App";
-import { MccPage } from "./MccPage";
+import { AppInfo } from "./App";
+import { MccEvent } from "./MccEvent";
 
-export interface ReviewRequest {
-  type: MccPage;
+export interface ReviewRequestInfo {
+  type: MccEvent;
   name: string;
   id: number;
-  payload: App;
-  previousState: IDb;
+  payload: AppInfo;
+  previousState?: IDb;
+}
+
+export interface ReviewRequest {
+  [key: string] : ReviewRequestInfo
 }

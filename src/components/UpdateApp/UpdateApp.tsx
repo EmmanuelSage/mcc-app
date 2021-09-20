@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { DbContext } from "../../context/DbContext";
+import { FormType } from "../../types/FormType";
 import { MccPage } from "../../types/MccPage";
 import AppForm from "../AppForm/AppForm";
 
@@ -29,6 +30,7 @@ const UpdateApp: React.FC<IProps> = ({ toggleTab, redirectTo }) => {
         toggleTab={toggleTab}
         redirectTo={redirectTo}
         appDefaults={appDefaults}
+        type={FormType.InitiateUpdateApplication}
       />
     );
   }
