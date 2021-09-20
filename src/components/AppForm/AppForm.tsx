@@ -2,11 +2,11 @@ import React, { SyntheticEvent, useContext, useState } from "react";
 import { DbContext } from "../../context/DbContext";
 import { AppInfo, permission } from "../../types/App";
 import { FormType } from "../../types/FormType";
-import { MccEvent } from "../../types/MccEvent";
 import { MccPage } from "../../types/MccPage";
 import { ReviewRequestInfo } from "../../types/ReviewRequest";
 import InputCheckbox from "../InputCheckbox/InputCheckbox";
 import InputField from "../InputField/InputField";
+import { MccEvent, MccEventTypes } from "../../MccEvent/MccEvent";
 import "./AppForm.css";
 
 export interface AppDefaults {
@@ -32,15 +32,17 @@ const AppForm: React.FC<IProps> = ({
   type,
 }) => {
   const { db, setDb } = useContext(DbContext);
-  const [name, setName] = useState(appDefaults.name);
-  const [owner, setOwner] = useState(appDefaults.owner);
-  const [configManager, setConfigManager] = useState(appDefaults.configManager);
-  const [roleName, setRoleName] = useState(appDefaults.roleName);
+  const [name, setName] = useState(() => appDefaults.name);
+  const [owner, setOwner] = useState(() => appDefaults.owner);
+  const [configManager, setConfigManager] = useState(
+    () => appDefaults.configManager
+  );
+  const [roleName, setRoleName] = useState(() => appDefaults.roleName);
   const [isCheckedInitiate, setIsCheckedInitiate] = useState(
-    appDefaults.isCheckedInitiate
+    () => appDefaults.isCheckedInitiate
   );
   const [isCheckedApprove, setIsCheckedApprove] = useState(
-    appDefaults.isCheckedApprove
+    () => appDefaults.isCheckedApprove
   );
 
   const handleSubmit = (e: SyntheticEvent) => {
@@ -64,11 +66,16 @@ const AppForm: React.FC<IProps> = ({
 
     if (type === FormType.CreateApplication) {
       db.apps[name] = app;
+      MccEvent.append({
+        type: MccEventTypes.CreateApplication,
+        name,
+        payload: app
+      });
     } else if (type === FormType.InitiateUpdateApplication) {
       db.reviewRequestsIdCount += 1;
       const id = db.reviewRequestsIdCount;
       const reviewRequest: ReviewRequestInfo = {
-        type: MccEvent.InitiateUpdateApplication,
+        type: MccEventTypes.InitiateUpdate,
         name,
         id,
         payload: {
@@ -76,6 +83,7 @@ const AppForm: React.FC<IProps> = ({
         },
       };
       db.reviewRequests[`${id}`] = reviewRequest;
+      MccEvent.append(reviewRequest)
     }
 
     db.currentApp = name;

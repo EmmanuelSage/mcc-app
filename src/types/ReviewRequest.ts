@@ -1,9 +1,9 @@
 import { IDb } from "../context/DbContext";
 import { AppInfo } from "./App";
-import { MccEvent } from "./MccEvent";
+import { MccEventTypes } from "../MccEvent/MccEvent";
 
 export interface ReviewRequestInfo {
-  type: MccEvent;
+  type: MccEventTypes;
   name: string;
   id: number;
   payload: AppInfo;

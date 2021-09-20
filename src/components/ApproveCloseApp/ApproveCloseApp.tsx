@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { DbContext } from "../../context/DbContext";
+import { MccEvent, MccEventTypes } from "../../MccEvent/MccEvent";
 import { MccPage } from "../../types/MccPage";
 import { ReviewRequestInfo } from "../../types/ReviewRequest";
 import ListComponent from "../ListComponent/ListComponent";
@@ -16,10 +17,16 @@ const ApproveCloseApp: React.FC<IProps> = ({ toggleTab }): JSX.Element => {
     if (db.reviewRequests[id] === undefined) {
       return;
     }
-  
+
     const reviewRequest = db.reviewRequests[id];
     const name = reviewRequest.name;
-  
+
+    MccEvent.append({
+      ...reviewRequest,
+      type: MccEventTypes.ApproveUpdate,
+      previousState: db.apps[name],
+    });
+
     db.apps[name] = {
       metadata: {
         ...db.apps[name].metadata,
@@ -30,19 +37,26 @@ const ApproveCloseApp: React.FC<IProps> = ({ toggleTab }): JSX.Element => {
         ...reviewRequest.payload.technicalData,
       },
     };
-  
+
     delete db.reviewRequests[id];
 
-    setDb(db)
-  }
+    setDb(db);
+  };
 
   const onClose = (id: number) => {
     if (db.reviewRequests[id] === undefined) {
       return;
     }
+    const reviewRequest = db.reviewRequests[id];
+
+    MccEvent.append({
+      ...reviewRequest,
+      type: MccEventTypes.CloseUpdate,
+    });
+
     delete db.reviewRequests[id];
-    setDb(db)
-  }
+    setDb(db);
+  };
 
   return (
     <div className="row">

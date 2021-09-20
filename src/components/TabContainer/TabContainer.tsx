@@ -8,12 +8,14 @@ import UpdateApp from "../UpdateApp/UpdateApp";
 import ViewApp from "../ViewApp/ViewApp";
 import ApproveCloseApp from "../ApproveCloseApp/ApproveCloseApp";
 import { DbContext } from "../../context/DbContext";
+import ViewAppEvent from "../ViewAppEvent/ViewAppEvent";
 
 enum SectionTitles {
   CreateApplicationv = "Create App",
   ViewApplication = "View App",
   UpdateApplication = "Update App",
   ApproveCloseRequest = "Approve/Close",
+  ViewAppEvent = "View App Events",
 }
 
 function Tabs() {
@@ -60,6 +62,13 @@ function Tabs() {
             ""
           )}
         </TabButton>
+        <TabButton
+          id={MccPage.ViewAppEvent}
+          toggleState={toggleState}
+          toggleTab={toggleTab}
+        >
+          {SectionTitles.ViewAppEvent}
+        </TabButton>
       </div>
 
       <TabContent
@@ -104,6 +113,15 @@ function Tabs() {
               <div>
                 <h1> {SectionTitles.ApproveCloseRequest}</h1>
                 <ApproveCloseApp toggleTab={toggleTab} />
+              </div>
+            ),
+          },
+          {
+            id: MccPage.ViewAppEvent,
+            component: (
+              <div>
+                <h1> {SectionTitles.ViewAppEvent}</h1>
+                <ViewAppEvent />
               </div>
             ),
           },
