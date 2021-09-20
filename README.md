@@ -1,5 +1,7 @@
 # Mcc App
 
+![mcc app](mccapp.gif)
+
 Todo
 [ ] Tests
 [ ] Add systems design diagram
